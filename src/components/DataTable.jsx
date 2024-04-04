@@ -85,7 +85,7 @@ const columns = [
           paddingLeft: `${row.depth * 2}rem`,
         }}
       >
-        <div className="flex item-center space-x-2">
+        <div className="flex space-x-2 item-center">
           <IndeterminateCheckbox
             {...{
               checked: row.getIsSelected(),
@@ -102,9 +102,9 @@ const columns = [
               }}
             >
               {row.getIsExpanded() ? (
-                <Subtract className="w-4 hover:bg-black/20 rounded-md transition duration-100" />
+                <Subtract className="w-4 transition duration-100 rounded-md hover:bg-black/20" />
               ) : (
-                <Add className="w-4 hover:bg-black/20 rounded-md transition duration-100" />
+                <Add className="w-4 transition duration-100 rounded-md hover:bg-black/20" />
               )}
             </button>
           ) : (
@@ -176,13 +176,13 @@ function DataTable({ setPackages }) {
   }, [rowSelection]);
   return (
     <div>
-      <table className="border-2  rounded-md min-w-full divide-y divide-black">
+      <table className="min-w-full border-2 divide-y divide-black rounded-md">
         <thead className="bg-sky-100">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
-                  className="px-6 py-3 text-start text-base font-medium  uppercase"
+                  className="px-6 py-3 text-sm font-medium uppercase md:text-base text-start"
                   key={header.id}
                 >
                   {flexRender(
@@ -199,7 +199,7 @@ function DataTable({ setPackages }) {
             <tr className="hover:bg-gray-200" key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td
-                  className="px-6 py-4 whitespace-nowrap text-sm font-medium"
+                  className="px-6 py-4 text-xs font-medium whitespace-nowrap md:text-sm"
                   key={cell.id}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

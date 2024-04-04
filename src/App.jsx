@@ -12,10 +12,11 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import MainTabPanel from "./components/MainTabPanel";
 import OtherPanel from "./components/OtherPanel";
-import DataTable from "./components/DataTable";
+
 import Button from "@mui/material/Button";
 
 import BasicDatePicker from "./components/DatePicker";
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -40,6 +41,24 @@ const client = [
     label: "D",
   },
 ];
+const XIcon = ({ className }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={className}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6 18 18 6M6 6l12 12"
+      />
+    </svg>
+  );
+};
 function App() {
   const [value, setValue] = useState(0);
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -72,8 +91,8 @@ function App() {
   const submissionHandler = () => {
     // console.log(startDate);
     console.log({
-      startDate: startDate.$d,
-      endDate: endDate.$d,
+      startDate: startDate?.$d,
+      endDate: endDate?.$d,
       selectedClient,
       RFQ,
       packages,
@@ -81,17 +100,19 @@ function App() {
   };
   return (
     <div className="m-5">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div className="flex items-center justify-center gap-2">
-          <BackIcon className="w-5 cursor-pointer" />
-          <h1 className="text-2xl font-semibold">Create Workorder</h1>
+          <BackIcon className="w-4 cursor-pointer md:w-5" />
+          <h1 className="text-xl font-semibold md:text-2xl">
+            Create Workorder
+          </h1>
         </div>
 
         <Button
           onClick={() => {
             setOpenDrawer(true);
           }}
-          className="!bg-sky-400 w-20"
+          className="!bg-sky-400 md:w-20"
           variant="contained"
         >
           Save
@@ -101,8 +122,8 @@ function App() {
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs value={value} onChange={handleChange} aria-label="tabs">
-              <Tab className="w-60" label="Overview" {...a11yProps(0)} />
-              <Tab className="w-60" label="Other" {...a11yProps(1)} />
+              <Tab className="md:w-60" label="Overview" {...a11yProps(0)} />
+              <Tab className="md:w-60" label="Other" {...a11yProps(1)} />
             </Tabs>
           </Box>
 
@@ -120,8 +141,17 @@ function App() {
               setOpenDrawer(false);
             }}
           >
-            <div className="w-80 rounded-md p-5 flex flex-col space-y-8">
-              <h1 className="text-xl font-semibold">Workorder</h1>
+            <div className="flex flex-col p-5 space-y-8 rounded-md w-80">
+              <div className="flex items-center justify-between">
+                <h1 className="text-lg font-semibold md:text-xl">Workorder</h1>
+                <button
+                  onClick={() => {
+                    setOpenDrawer(false);
+                  }}
+                >
+                  <XIcon className="w-5" />
+                </button>
+              </div>
               <TextField
                 value={selectedClient}
                 onChange={(e) => {
