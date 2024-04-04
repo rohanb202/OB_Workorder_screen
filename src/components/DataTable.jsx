@@ -117,12 +117,18 @@ const columns = [
   },
   {
     accessorKey: "rate_per_sqft",
-    header: () => "Rate",
+    header: () => (
+      <div className="">
+        Rate <span className="text-xs font-normal">(in sqft)</span>
+      </div>
+    ),
+
     footer: (props) => props.column.id,
   },
   {
     accessorKey: "total_expenditure",
     header: () => "Total",
+    cell: ({ getValue }) => <div>₹ {getValue()}</div>,
     footer: (props) => props.column.id,
   },
 ];
@@ -182,7 +188,7 @@ function DataTable({ setPackages }) {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
-                  className="px-6 py-3 text-sm font-medium uppercase md:text-base text-start"
+                  className="px-6 py-3 text-sm font-medium md:text-base text-start"
                   key={header.id}
                 >
                   {flexRender(

@@ -175,7 +175,7 @@ function App() {
               <BasicDatePicker
                 value={endDate}
                 setValue={setEndDate}
-                label={`Date of complition`}
+                label={`Date of completion`}
               />
               <TextField
                 value={RFQ}
